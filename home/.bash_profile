@@ -1,6 +1,7 @@
 
 # Git shortcuts
 alias st="git status"
+alias pull="git pull"
 
 # Rails development
 alias be="bundle exec"
