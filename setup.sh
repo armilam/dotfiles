@@ -4,7 +4,7 @@ project_dir="${HOME}/dotfiles"
 
 # Dotfiles
 echo -e "\nDotfiles"
-$project_dir/scripts/dotfiles.sh
+$project_dir/scripts/dotfiles.sh $project_dir
 
 # Homebrew
 echo -e "\nHomebrew"
