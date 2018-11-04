@@ -4,9 +4,10 @@ project_dir="${HOME}/dotfiles"
 dotfiles=(".bash_profile")
 
 echo "Creating dotfiles symlinks..."
+# TODO: Just loop through all the files in the home directory, instead of a defined list
 for dotfile in "${dotfiles[@]}";do
   # TODO: Rename existing dotfiles to add .old so we don't lose what may already be there
-  ln -sv ${project_dir}/${dotfile} ${HOME}
+  ln -sv ${project_dir}/home/${dotfile} ${HOME}
 done
 
 # Homebrew
