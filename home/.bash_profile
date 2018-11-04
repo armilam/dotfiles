@@ -19,5 +19,5 @@ alias startredis="redis-server"
 # TODO: I need to do something with the path
 # add libpq to the end of the path (done)
 # other things?
-export PATH="$PATH:~/dotfiles/bin:/usr/local/opt/libpq/bin"
+export PATH="$PATH:$HOME/dotfiles/bin:/usr/local/opt/libpq/bin"
 
