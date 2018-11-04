@@ -8,13 +8,11 @@ for filename in ${project_dir}/home/.[!.]*; do
   ln -sv $filename ${HOME}
 done
 
-exit 0
-
 # Homebrew
+echo "Homebrew"
+$project_dir/scripts/homebrew.sh
 
-# git via Homebrew
-
-# gpg via Homebrew
+exit 0
 
 echo "Installing asdf..."
 # TODO: Skip if it's already installed
