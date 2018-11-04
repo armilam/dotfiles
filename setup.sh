@@ -1,12 +1,10 @@
 #!/bin/bash
 
 project_dir="${HOME}/dotfiles"
-dotfiles=(".bash_profile")
 
-echo "Creating dotfiles symlinks..."
-for filename in ${project_dir}/home/.[!.]*; do
-  ln -sv $filename ${HOME}
-done
+# Dotfiles
+echo -e "\nDotfiles"
+$project_dir/scripts/dotfiles.sh
 
 # Homebrew
 echo -e "\nHomebrew"
