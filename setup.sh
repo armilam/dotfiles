@@ -9,7 +9,7 @@ for filename in ${project_dir}/home/.[!.]*; do
 done
 
 # Homebrew
-echo "Homebrew"
+echo -e "\nHomebrew"
 $project_dir/scripts/homebrew.sh
 
 exit 0
