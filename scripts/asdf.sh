@@ -1,4 +1,7 @@
-echo "Checking for asdf..."
+format_bold=$(tput bold)
+format_normal=$(tput sgr0)
+
+echo "Checking for ${format_bold}asdf${format_normal}..."
 
 which -s asdf
 if [[ $? != 0 ]] ; then
@@ -11,7 +14,7 @@ else
 fi
 
 # Ruby
-echo "Checking for ruby..."
+echo -e "\nChecking for ${format_bold}ruby${format_normal}..."
 
 if asdf which ruby > /dev/null; then
   echo "Ruby found. Updating it..."
@@ -34,7 +37,7 @@ else
 fi
 
 # NodeJS
-echo "Checking for nodejs..."
+echo -e "\nChecking for ${format_bold}nodejs${format_normal}..."
 
 if asdf which nodejs > /dev/null; then
   echo "NodeJS found. Updating it..."
