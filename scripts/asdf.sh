@@ -65,6 +65,19 @@ else
   asdf global postgres 9.6.8
 fi
 
+# Redis
+echo -e "\nChecking for ${format_bold}redis${format_normal}..."
+
+if asdf which redis > /dev/null; then
+  echo "Redis found. Updating plugin..."
+  asdf plugin-update redis
+else
+  # TODO: Ask for version(s) to install
+  asdf plugin-add redis https://github.com/smashedtoatoms/asdf-redis.git
+  asdf install redis 5.0.0
+  asdf global redis 5.0.0
+fi
+
 # TODO: All the plugins
 
 echo "Done with asdf."
