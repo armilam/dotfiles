@@ -9,7 +9,7 @@ if [[ $? != 0 ]] ; then
   # TODO: Ask for what version, or find the latest stable version to install
   git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.6.0
 else
-  echo "adsf found. Updating it..."
+  echo "asdf found. Updatpostgres ing it..."
   asdf update
 fi
 
@@ -17,7 +17,7 @@ fi
 echo -e "\nChecking for ${format_bold}ruby${format_normal}..."
 
 if asdf which ruby > /dev/null; then
-  echo "Ruby found. Updating it..."
+  echo "Ruby found. Updating plugin..."
   asdf plugin-update ruby
 else
   echo "Ruby not found. Installing it..."
@@ -40,7 +40,7 @@ fi
 echo -e "\nChecking for ${format_bold}nodejs${format_normal}..."
 
 if asdf which nodejs > /dev/null; then
-  echo "NodeJS found. Updating it..."
+  echo "NodeJS found. Updating plugin..."
   asdf plugin-update nodejs
 else
   # TODO: Ask for version(s) to install
@@ -50,6 +50,19 @@ else
   # Lessonly
   asdf install nodejs 10.9.0
   asdf global nodejs 10.9.0
+fi
+
+# PostgreSQL
+echo -e "\nChecking for ${format_bold}postgres${format_normal}..."
+
+if asdf which postgres > /dev/null; then
+  echo "PostgreSQL found. Updating plugin..."
+  asdf plugin-update postgres
+else
+  # TODO: Ask for version(s) to install
+  asdf plugin-add postgres https://github.com/smashedtoatoms/asdf-postgres.git
+  POSTGRES_EXTRA_CONFIGURE_OPTIONS=--with-uuid=e2fs asdf install postgres 9.6.8
+  asdf global postgres 9.6.8
 fi
 
 # TODO: All the plugins
