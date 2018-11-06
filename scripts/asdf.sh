@@ -6,8 +6,12 @@ echo "Checking for ${format_bold}asdf${format_normal}..."
 which -s asdf
 if [[ $? != 0 ]] ; then
   echo "asdf not found. Installing it..."
-  # TODO: Ask for what version, or find the latest stable version to install
-  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.6.0
+
+  echo "Visit https://github.com/asdf-vm/asdf to find versions."
+  printf "Enter ${format_bold}asdf${format_normal} version you'd like to install: "
+  read version
+
+  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v$version
 else
   echo "asdf found. Updatpostgres ing it..."
   asdf update
@@ -78,6 +82,7 @@ else
   asdf global redis 5.0.0
 fi
 
-# TODO: All the plugins
+# TODO: Java
+# TODO: elasticsearch (depends on Java)
 
 echo "Done with asdf."
