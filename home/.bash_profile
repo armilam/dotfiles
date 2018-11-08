@@ -1,5 +1,9 @@
 
-# Git shortcuts
+# Bash
+alias bp="source ~/.bash_profile"
+
+# git
+source ~/.git_completion
 alias st='git status'
 alias co='git checkout'
 alias pull='git pull'
