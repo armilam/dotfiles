@@ -32,4 +32,14 @@ else
   brew install gpg
 fi
 
+# siege
+echo "Checking for ${format_bold}siege${format_normal} via Homebrew..."
+if brew ls --versions siege > /dev/null; then
+  echo "siege found. Updating it..."
+  brew upgrade siege
+else
+  echo "siege not found. Installing it..."
+  brew install siege
+fi
+
 echo "Done with Homebrew."
