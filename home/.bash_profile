@@ -4,6 +4,7 @@ alias st='git status'
 alias co='git checkout'
 alias pull='git pull'
 alias push='git push'
+alias start-over="git checkout master && git fetch origin && git pull && bundle && npm run webpack && rake db:migrate"
 
 # Rails development
 alias be='bundle exec'
@@ -21,8 +22,12 @@ alias stopes='kill $(cat /tmp/elasticsearch-pid)'
 . $HOME/.asdf/completions/asdf.bash
 
 # Lessonly
-alias startlly='startpg && startredis && startes'
-alias stoplly='stopes && stopredis && stoppg'
+alias lly-start-infrastructure='startpg && startredis && startes'
+alias lly-stop-infrastructure='stopes && stopredis && stoppg'
+
+alias lly-core-server="ALGOLIA_INDEX_NAME_CUSTOMIZER=armilam PUBLIC_HOST=lvh.me:3000 SCOUT_DEV_TRACE=true rails s -b 127.0.0.1 -p 3000"
+alias lly-core-console="ALGOLIA_INDEX_NAME_CUSTOMIZER=armilam PUBLIC_HOST=lvh.me:3000 bundle exec rails c"
+alias lly-core-sidekiq="ALGOLIA_INDEX_NAME_CUSTOMIZER=armilam PUBLIC_HOST=lvh.me bundle exec sidekiq -q paperclip -q default -q mailers -q searchkick -q long_running"
 
 export PATH="$PATH:$HOME/dotfiles/bin:/usr/local/opt/libpq/bin"
 
