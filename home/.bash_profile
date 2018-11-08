@@ -29,5 +29,8 @@ alias lly-core-server="ALGOLIA_INDEX_NAME_CUSTOMIZER=armilam PUBLIC_HOST=lvh.me:
 alias lly-core-console="ALGOLIA_INDEX_NAME_CUSTOMIZER=armilam PUBLIC_HOST=lvh.me:3000 bundle exec rails c"
 alias lly-core-sidekiq="ALGOLIA_INDEX_NAME_CUSTOMIZER=armilam PUBLIC_HOST=lvh.me bundle exec sidekiq -q paperclip -q default -q mailers -q searchkick -q long_running"
 
+# Load neat prompt
+source ~/.bash_prompt
+
 export PATH="$PATH:$HOME/dotfiles/bin:/usr/local/opt/libpq/bin"
 
