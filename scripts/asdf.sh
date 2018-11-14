@@ -34,10 +34,10 @@ else
   gem install bundler
 
   # Latest
-  asdf install ruby 2.5.1
-  asdf use ruby 2.5.1
+  asdf install ruby 2.5.3
+  asdf use ruby 2.5.3
   gem install bundler
-  asdf global ruby 2.5.1
+  asdf global ruby 2.5.3
 fi
 
 # NodeJS
