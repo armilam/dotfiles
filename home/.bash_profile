@@ -2,6 +2,9 @@
 # Bash
 alias bp="source ~/.bash_profile"
 
+# SSH Keys
+alias ssh-github="ssh-add ~/.ssh/github"
+
 # git
 source ~/.git_completion
 alias st='git status'
