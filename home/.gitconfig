@@ -9,18 +9,16 @@
 	po = "!git push -u origin $(git rev-parse --abbrev-ref HEAD)"
 [init]
 	templatedir = ~/.git_template
-
-# TODO: Install Kaleidoscope and uncomment the below
-#[mergetool "Kaleidoscope"]
-#	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-#	trustexitcode = true
-#[merge]
-#	tool = Kaleidoscope
-#[difftool "Kaleidoscope"]
-#	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
-# [difftool]
-# 	prompt = false
-# [mergetool]
-# 	prompt = false
-#[diff]
-#	tool = Kaleidoscope
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustexitcode = true
+[merge]
+	tool = Kaleidoscope
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[difftool]
+	prompt = false
+[mergetool]
+	prompt = false
+[diff]
+	tool = Kaleidoscope
