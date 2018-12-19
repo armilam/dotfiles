@@ -14,7 +14,7 @@ fi
 
 # various libraries
 echo "Installing ${format_bold}various libraries${format_normal}..."
-brew install coreutils automake autoconf openssl libyaml readline libxslt libtool unixodbc
+brew install coreutils automake autoconf openssl libyaml readline libxslt libtool unixodbc libpq
 
 # git
 echo "Checking for ${format_bold}git${format_normal} via Homebrew..."
@@ -46,6 +46,7 @@ else
   brew install siege
 fi
 
+# TODO: This stuff may change with the lessonly local SSL work
 # dnsmasq
 echo "Checking for ${format_bold}dnsmasq${format_normal} via Homebrew..."
 if brew ls --versions dnsmasq > /dev/null; then
