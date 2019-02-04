@@ -32,9 +32,9 @@ alias stopes='kill $(cat /tmp/elasticsearch-pid)'
 alias lly-start-infrastructure='startpg && startredis && startes'
 alias lly-stop-infrastructure='stopes && stopredis && stoppg'
 
-alias lly-core-server="ALGOLIA_INDEX_NAME_CUSTOMIZER=armilam PUBLIC_HOST=lvh.me:3000 SCOUT_DEV_TRACE=true rails s -b 127.0.0.1 -p 3000"
-alias lly-core-console="ALGOLIA_INDEX_NAME_CUSTOMIZER=armilam PUBLIC_HOST=lvh.me:3000 bundle exec rails c"
-alias lly-core-sidekiq="ALGOLIA_INDEX_NAME_CUSTOMIZER=armilam PUBLIC_HOST=lvh.me bundle exec sidekiq -q paperclip -q default -q mailers -q searchkick -q long_running"
+alias lly-core-server="bundle exec rails s -b 127.0.0.1 -p 3000"
+alias lly-core-console="bundle exec rails c"
+alias lly-core-sidekiq="bundle exec sidekiq -q paperclip -q default -q mailers -q searchkick -q long_running"
 
 # Load neat prompt
 source ~/.bash_prompt
