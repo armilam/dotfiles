@@ -36,6 +36,16 @@ else
   brew install gpg
 fi
 
+# gcc
+echo "Checking for ${format_bold}gcc${format_normal} via Homebrew..."
+if brew ls --versions gcc > /dev/null; then
+  echo "gcc found. Updating it..."
+  brew upgrade gcc
+else
+  echo "gcc not found. Installing it..."
+  brew install gcc
+fi
+
 # siege
 echo "Checking for ${format_bold}siege${format_normal} via Homebrew..."
 if brew ls --versions siege > /dev/null; then
@@ -63,5 +73,8 @@ else
   sudo mkdir -v /etc/resolver
   sudo bash -c 'echo "nameserver 127.0.0.1" > /etc/resolver/test'
 fi
+
+echo "Cleaning up Homebrew..."
+brew cleanup
 
 echo "Done with Homebrew."

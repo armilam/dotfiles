@@ -7,6 +7,12 @@
 	track = "!git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`"
 	cleanup = "!git remote prune origin && git branch -vv | grep ': gone]' | cut -d ' ' -f 3 | xargs -n 1 git branch -D"
 	po = "!git push -u origin $(git rev-parse --abbrev-ref HEAD)"
+	sl = "!git log --oneline --decorate -20"
+	slg = "!git log --oneline --decorate --graph -20"
+	lg = "!git log --oneline --decorate --graph"
+	ff = "!git merge --ff-only"
+        #fco="!f() { git branch -l -vv --color=always --format='%(refname)' | sed "s_refs/heads/__" | fzf --query="$@" --height=40% --ansi --tac --color=16 --border | awk '{print $1}' | xargs git co; }; f"
+        fco="!f() { git branch -a -vv --color=always --format='%(refname)' | sed "s_refs/heads/__" | sed "s_refs/remotes/__" | fzf --query="$@" --height=40% --ansi --tac --color=16 --border | awk '{print $1}' | xargs git checkout; }; f"
 [init]
 	templatedir = ~/.git_template
 [mergetool "Kaleidoscope"]

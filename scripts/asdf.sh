@@ -28,16 +28,11 @@ else
   # TODO: Ask for version(s) to install
   asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
 
-  # For Lessonly
-  asdf install ruby 2.4.2
-  asdf use ruby 2.4.2
-  gem install bundler
-
   # Latest
-  asdf install ruby 2.5.3
-  asdf use ruby 2.5.3
+  asdf install ruby 2.6.1
+  asdf use ruby 2.6.1
   gem install bundler
-  asdf global ruby 2.5.3
+  asdf global ruby 2.6.1
 fi
 
 # NodeJS
@@ -64,12 +59,12 @@ if asdf which postgres > /dev/null; then
   asdf plugin-update postgres
 else
   # TODO: Ask for version(s) to install
-  export LDFLAGS="-L/usr/local/opt/openssl/lib -L/usr/local/lib -L/usr/local/opt/expat/lib"
-  export CFLAGS="-I/usr/local/opt/openssl/include/ -I/usr/local/include -I/usr/local/opt/expat/include"
-  export CPPFLAGS="-I/usr/local/opt/openssl/include/ -I/usr/local/include -I/usr/local/opt/expat/include"
+  export LDFLAGS="-L/usr/local/opt/openssl/lib"
+  export CFLAGS="-I/usr/local/opt/openssl/include/"
+  export CPPFLAGS="-I/usr/local/opt/openssl/include/"
   asdf plugin-add postgres https://github.com/smashedtoatoms/asdf-postgres.git
-  POSTGRES_EXTRA_CONFIGURE_OPTIONS="--with-uuid=e2fs --with-openssl" asdf install postgres 9.6.8
-  asdf global postgres 9.6.8
+  POSTGRES_EXTRA_CONFIGURE_OPTIONS="--with-uuid=e2fs --with-openssl" asdf install postgres 11.3
+  asdf global postgres 11.3
 fi
 
 # Redis
