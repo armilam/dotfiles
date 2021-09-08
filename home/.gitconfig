@@ -6,7 +6,19 @@
 [alias]
 	track = "!git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`"
 	cleanup = "!git remote prune origin && git branch -vv | grep ': gone]' | cut -d ' ' -f 3 | xargs -n 1 git branch -D"
+	c = "!git commit"
+	cob = "!git checkout -b"
+	cm = "!git commit -m"
+	cam = "!git commit -am"
+	can = "!git commit --amend --no-edit"
+	d = "!git diff --color-moved"
+	dt = "!git difftool"
+	fo = "!git fetch origin"
+	st = "!git status"
 	po = "!git push -u origin $(git rev-parse --abbrev-ref HEAD)"
+	m = merge
+	mo = "!git merge origin/$1 #"
+	r = "!git rebase"
 	sl = "!git log --oneline --decorate -20"
 	slg = "!git log --oneline --decorate --graph -20"
 	lg = "!git log --oneline --decorate --graph"
@@ -28,3 +40,11 @@
 	prompt = false
 [diff]
 	tool = Kaleidoscope
+
+
+[url "https://4cf9d57aafda46fdfb06d7660255eb14b3007d68@github.com/highalpha"]
+	insteadOf = https://github.com/highalpha
+[core]
+	excludesfile = /Users/armilam/.gitignore
+[pull]
+	ff = only
