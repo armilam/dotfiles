@@ -5,6 +5,9 @@ project_dir="${HOME}/dotfiles"
 format_bold=$(tput bold)
 format_normal=$(tput sgr0)
 
+# xcode-select
+xcode-select --install
+
 # Dotfiles
 echo -e "\n${format_bold}Dotfiles${format_normal}"
 $project_dir/scripts/dotfiles.sh $project_dir

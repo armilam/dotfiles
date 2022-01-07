@@ -16,6 +16,25 @@ fi
 echo "Installing ${format_bold}various libraries${format_normal}..."
 brew install coreutils automake autoconf openssl libyaml readline libxslt libtool unixodbc libpq zlib curl ossp-uuid
 
+# zsh
+echo "Checking for ${format_bold}zsh${format_normal} via Homebrew..."
+if brew ls --versions zsh > /dev/null; then
+  echo "zsh found. Updating it..."
+  brew upgrade zsh
+else
+  echo "zsh not found. Installing it..."
+  brew install zsh
+fi
+
+# oh-my-zsh
+echo "Checking for ${format_bold}oh-my-zsh${format_normal}..."
+if ls -d ~/.oh-my-zsh > /dev/null; then
+  echo "oh-my-zsh found. Moving on..."
+else
+  echo "oh-my-zsh not found. Installing it..."
+  sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
+
 # git
 echo "Checking for ${format_bold}git${format_normal} via Homebrew..."
 if brew ls --versions git > /dev/null; then

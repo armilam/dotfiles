@@ -38,7 +38,7 @@ fi
 # NodeJS
 echo -e "\nChecking for ${format_bold}nodejs${format_normal}..."
 
-if asdf which nodejs > /dev/null; then
+if asdf which node > /dev/null; then
   echo "NodeJS found. Updating plugin..."
   asdf plugin-update nodejs
 else
