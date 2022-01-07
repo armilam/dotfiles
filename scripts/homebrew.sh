@@ -24,6 +24,7 @@ if brew ls --versions zsh > /dev/null; then
 else
   echo "zsh not found. Installing it..."
   brew install zsh
+  chsh -s $(which zsh)
 fi
 
 # oh-my-zsh
