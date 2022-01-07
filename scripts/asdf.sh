@@ -13,7 +13,7 @@ if [[ $? != 0 ]] ; then
 
   git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v$version
 else
-  echo "asdf found. Updatpostgres ing it..."
+  echo "asdf found. Updating it..."
   asdf update
 fi
 
@@ -29,10 +29,10 @@ else
   asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
 
   # Latest
-  asdf install ruby 2.6.1
-  asdf use ruby 2.6.1
+  asdf install ruby 3.0.2
+  asdf use ruby 3.0.2
   gem install bundler
-  asdf global ruby 2.6.1
+  asdf global ruby 3.0.2
 fi
 
 # NodeJS
@@ -46,9 +46,9 @@ else
   asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
   bash ~/.asdf/plugins/nodejs/bin/import-release-team-keyring
 
-  # Lessonly
-  asdf install nodejs 10.9.0
-  asdf global nodejs 10.9.0
+  # Latest
+  asdf install nodejs 16.13.1
+  asdf global nodejs 16.13.1
 fi
 
 # PostgreSQL
@@ -63,8 +63,8 @@ else
   export CFLAGS="-I/usr/local/opt/openssl/include/"
   export CPPFLAGS="-I/usr/local/opt/openssl/include/"
   asdf plugin-add postgres https://github.com/smashedtoatoms/asdf-postgres.git
-  POSTGRES_EXTRA_CONFIGURE_OPTIONS="--with-uuid=e2fs --with-openssl" asdf install postgres 11.3
-  asdf global postgres 11.3
+  POSTGRES_EXTRA_CONFIGURE_OPTIONS="--with-uuid=e2fs --with-openssl" asdf install postgres 14.1
+  asdf global postgres 14.1
 fi
 
 # Redis
@@ -76,8 +76,8 @@ if asdf which redis > /dev/null; then
 else
   # TODO: Ask for version(s) to install
   asdf plugin-add redis https://github.com/smashedtoatoms/asdf-redis.git
-  asdf install redis 5.0.0
-  asdf global redis 5.0.0
+  asdf install redis 6.2.6
+  asdf global redis 6.2.6
 fi
 
 # TODO: Java

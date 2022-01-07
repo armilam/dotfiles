@@ -1,3 +1,4 @@
+export ZSH=/Users/armilam/.oh-my-zsh
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -70,7 +71,7 @@ alias gs='gitscript'
 # ssh
 function sshall() {
   eval $(ssh-agent -s)
-  ssh-add -A
+  ssh-add --apple-load-keychain
 }
 alias ssha='sshall'
 

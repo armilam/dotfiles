@@ -14,7 +14,7 @@ fi
 
 # various libraries
 echo "Installing ${format_bold}various libraries${format_normal}..."
-brew install coreutils automake autoconf openssl libyaml readline libxslt libtool unixodbc libpq
+brew install coreutils automake autoconf openssl libyaml readline libxslt libtool unixodbc libpq zlib curl ossp-uuid
 
 # git
 echo "Checking for ${format_bold}git${format_normal} via Homebrew..."
@@ -44,34 +44,6 @@ if brew ls --versions gcc > /dev/null; then
 else
   echo "gcc not found. Installing it..."
   brew install gcc
-fi
-
-# siege
-echo "Checking for ${format_bold}siege${format_normal} via Homebrew..."
-if brew ls --versions siege > /dev/null; then
-  echo "siege found. Updating it..."
-  brew upgrade siege
-else
-  echo "siege not found. Installing it..."
-  brew install siege
-fi
-
-# TODO: This stuff may change with the lessonly local SSL work
-# dnsmasq
-echo "Checking for ${format_bold}dnsmasq${format_normal} via Homebrew..."
-if brew ls --versions dnsmasq > /dev/null; then
-  echo "dnsmasq found. Updating it..."
-  brew upgrade dnsmasq
-else
-  echo "dnsmasq not found. Installing it..."
-  brew install dnsmasq
-
-  printf '\naddress=/.test/127.0.0.1\n' >> $(brew --prefix)/etc/dnsmasq.conf
-
-  sudo brew services start dnsmasq
-
-  sudo mkdir -v /etc/resolver
-  sudo bash -c 'echo "nameserver 127.0.0.1" > /etc/resolver/test'
 fi
 
 echo "Cleaning up Homebrew..."

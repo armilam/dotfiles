@@ -21,15 +21,6 @@ exit 0
 
 # Set up Github SSH
 
-# Heroku CLI
-
 # Projects
 echo "Creating project directory..."
 mkdir ~/Documents/Projects
-# TODO: Clone anything?
-
-# Lessonly
-echo "Setting up Lessonly environment..."
-mkdir -p ~/Documents/Lessonly/Source
-git clone git@github.com:lessonly/lessonly.git ~/Documents/Lessonly/Source
-# TODO: Clone anything else? Provide a list of options?
