@@ -80,6 +80,7 @@ alias dburl='heroku config:get DATABASE_URL -a '
 
 # Rails development
 alias be='bundle exec'
+alias devlog='tail -f log/development.log ~/Library/Logs/puma-dev.log'
 
 # Docker
 alias dc='docker-compose'

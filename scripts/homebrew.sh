@@ -14,7 +14,7 @@ fi
 
 # various libraries
 echo "Installing ${format_bold}various libraries${format_normal}..."
-brew install coreutils automake autoconf openssl libyaml readline libxslt libtool unixodbc libpq zlib curl ossp-uuid
+brew install coreutils automake autoconf openssl libyaml readline libxslt libtool unixodbc libpq zlib curl ossp-uuid v8
 
 # zsh
 echo "Checking for ${format_bold}zsh${format_normal} via Homebrew..."
