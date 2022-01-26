@@ -20,6 +20,15 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git asdf)
 
+# This enables completion for heroku and must appear before calling oh-my-zsh.sh
+if type brew &>/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
+  autoload -Uz compinit
+  compinit
+fi
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -114,5 +123,5 @@ export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 # homebrew
-#export PATH=$PATH:/usr/local/sbin
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
