@@ -1,0 +1,18 @@
+#!/bin/sh
+
+echo "Made it"
+
+work_folder=$HOME/Documents/Woven/Source/apply-yourself
+
+if [[ $# -eq 0 ]] ; then
+  echo "Going to work folder"
+
+  cd $work_folder
+elif [[ $1 -eq 'start' ]] ; then
+  echo "Starting postgres and redis"
+  cd $work_folder
+  startpg
+  startredis
+else
+  echo "I'm not sure what that means"
+fi

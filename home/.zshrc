@@ -57,6 +57,9 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# Shell
+alias vz='vi ~/.zshrc'
+
 # asdf
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
@@ -86,10 +89,14 @@ alias ssha='sshall'
 
 # Heroku
 alias dburl='heroku config:get DATABASE_URL -a '
+alias h='heroku'
 
 # Rails development
 alias be='bundle exec'
 alias devlog='tail -f log/development.log ~/Library/Logs/puma-dev.log'
+alias pumar='touch tmp/restart.txt'
+alias pumas='puma-dev -stop'
+alias pumak='killall -9 puma-dev'
 
 # Docker
 alias dc='docker-compose'
@@ -124,4 +131,8 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 # homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Woven dev
+alias wo='. work'
+alias cdw='cd ~/Documents/Woven/Source/apply-yourself'
 
