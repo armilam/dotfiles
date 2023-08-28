@@ -66,6 +66,19 @@ else
   brew install gcc
 fi
 
+# fzf
+echo "Checking for ${format_bold}fzf${format_normal} via Homebrew..."
+if brew ls --versions fzf > /dev/null; then
+  echo "fzf found. Updating it..."
+  brew upgrade fzf
+else
+  echo "fzf not found. Installing it..."
+  brew install fzf
+fi
+
+echo "Setting up fzf..."
+$(brew --prefix)/opt/fzf/install
+
 echo "Cleaning up Homebrew..."
 brew cleanup
 

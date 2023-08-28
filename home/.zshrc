@@ -60,11 +60,6 @@ source $ZSH/oh-my-zsh.sh
 # Shell
 alias vz='vi ~/.zshrc'
 
-# asdf
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
-alias arst='asdf'
-
 # git
 alias st='git status'
 alias co='git checkout'
@@ -90,6 +85,13 @@ alias ssha='sshall'
 # Heroku
 alias dburl='heroku config:get DATABASE_URL -a '
 alias h='heroku'
+function hay() { heroku $@ -a woven-apply-yourself; }
+function hays() { heroku $@ -a woven-apply-yourself-staging; }
+function hjs() { heroku $@ -a woven-job-scraper; }
+function hwh() { heroku $@ -a woven-webhooks; }
+hc() {
+  heroku config -a ${2:-woven-apply-yourself} | grep ${1:-SIDEKIQ_PASSWORD} | awk -F ' ' '{ print $2 }' | pbcopy
+}
 
 # Rails development
 alias be='bundle exec'
@@ -99,16 +101,20 @@ alias pumas='puma-dev -stop'
 alias pumak='killall -9 puma-dev'
 
 # Docker
-alias dc='docker-compose'
-alias dcu='docker-compose up'
-alias dcd='docker-compose down'
-alias dcr='docker-compose run'
+alias dc='docker compose'
+alias dcu='docker compose up'
+alias dcd='docker compose down'
+alias dcr='docker compose restart'
+alias dce='docker compose exec'
+alias dw='docker compose exec web'
 
 # Tools
 alias startpg='pg_ctl start -w'
 alias stoppg='pg_ctl stop'
 alias startredis='redis-server --daemonize yes'
 alias stopredis='redis-cli shutdown'
+alias startmongo='brew services start mongodb-community'
+alias stopmongo='brew services stop mongodb-community'
 
 alias ff='fzf'
 
@@ -132,7 +138,18 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 # homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
+# asdf
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
+alias arst='asdf'
+
 # Woven dev
 alias wo='. work'
 alias cdw='cd ~/Documents/Woven/Source/apply-yourself'
 
+# golang
+export GOROOT=/Users/armilam/.asdf/installs/golang/1.18/go
+export GOPATH=/Users/armilam/.asdf/installs/golang/1.18/packages
+
+# python
+export PATH="$PATH:`python3 -m site --user-base`/bin"
