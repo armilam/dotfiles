@@ -4,7 +4,8 @@ export ZSH=/Users/armilam/.oh-my-zsh
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+# ZSH_THEME="robbyrussell"
+ZSH_THEME="armilam"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -81,6 +82,7 @@ function sshall() {
   ssh-add --apple-load-keychain
 }
 alias ssha='sshall'
+ssh-add --apple-load-keychain
 
 # Heroku
 alias dburl='heroku config:get DATABASE_URL -a '
@@ -116,6 +118,9 @@ alias stopredis='redis-cli shutdown'
 alias startmongo='brew services start mongodb-community'
 alias stopmongo='brew services stop mongodb-community'
 
+# Terraform
+alias tf='terraform'
+
 alias ff='fzf'
 
 export PATH="$PATH:$HOME/dotfiles/bin:/usr/local/opt/libpq/bin"
@@ -143,13 +148,22 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 . $HOME/.asdf/completions/asdf.bash
 alias arst='asdf'
 
-# Woven dev
-alias wo='. work'
-alias cdw='cd ~/Documents/Woven/Source/apply-yourself'
-
 # golang
 export GOROOT=/Users/armilam/.asdf/installs/golang/1.18/go
 export GOPATH=/Users/armilam/.asdf/installs/golang/1.18/packages
 
 # python
+alias py=python
+alias pm='poetry run python server/manage.py'
+alias po='poetry run'
+alias pt='pm test --no-input --parallel --keepdb'
 export PATH="$PATH:`python3 -m site --user-base`/bin"
+
+# node
+alias pn=pnpm
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /opt/homebrew/bin/terraform terraform
+
+# bun completions
+[ -s "/Users/armilam/.bun/_bun" ] && source "/Users/armilam/.bun/_bun"

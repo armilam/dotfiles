@@ -49,3 +49,5 @@ source ~/.bash_prompt
 
 export PATH="$PATH:$HOME/dotfiles/bin:/usr/local/opt/libpq/bin"
 
+
+complete -C /opt/homebrew/bin/terraform terraform

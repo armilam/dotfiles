@@ -11,7 +11,7 @@ if [[ $? != 0 ]] ; then
   printf "Enter ${format_bold}asdf${format_normal} version you'd like to install: "
   read version
 
-  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch release-v$version
+  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v$version
 else
   echo "asdf found. Updating it..."
   asdf update
