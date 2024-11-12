@@ -13,6 +13,7 @@
 	can = "!git commit --amend --no-edit"
 	cb = "!git branch | grep '*' | awk '{ print $2 }' | pbcopy"
 	d = "!git diff --color-moved"
+        ds = "!git diff --color-moved --staged"
 	dc = "!git diff --cached"
 	dt = "!git difftool"
 	dtc = "!git difftool --cached"

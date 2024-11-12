@@ -110,6 +110,17 @@ alias dcr='docker compose restart'
 alias dce='docker compose exec'
 alias dw='docker compose exec web'
 
+# Denim
+alias denim-queues='awslocal sqs create-queue --queue-name denim-local-email-queue && awslocal sqs create-queue --queue-name denim-local-email-event-queue && awslocal sqs create-queue --queue-name denim-local-sms-queue && awslocal sqs create-queue --queue-name denim-local-file-parse-queue && awslocal sqs create-queue --queue-name denim-local-announcement-queue && awslocal sqs create-queue --queue-name denim-local-assignment-queue && awslocal sqs create-queue --queue-name denim-local-create-tango-queue && awslocal sqs create-queue --queue-name denim-local-announcement-notification-queue'
+alias denim-buckets='awslocal s3api create-bucket --bucket denim-local-app-bucket && awslocal s3api create-bucket --bucket denim-local-sftp && awslocal s3api create-bucket --bucket denim-local-email-bucket'
+alias denim-infra='startpg & startredis & localstack start > ~/.tmp/.lcltemp & sleep 10 && denim-queues && denim-buckets && tail -f ~/.tmp/.lcltemp'
+alias denim-infra-stop='stoppg & stopredis & localstack stop && rm ~/.tmp/.lcltemp'
+alias denim-workers='pm worker --queues denim-local-email-queue,denim-local-email-event-queue,denim-local-sms-queue,denim-local-file-parse-queue,denim-local-announcement-queue,denim-local-assignment-queue,denim-local-create-tango-queue,denim-local-announcement-notification-queue'
+alias denim-server='pm runserver'
+alias denim-client='pnpm start'
+alias ssh-dev='ssh 54.88.126.136'
+alias ssh-prod='ssh 52.203.157.36'
+
 # Tools
 alias startpg='pg_ctl start -w'
 alias stoppg='pg_ctl stop'
@@ -154,9 +165,9 @@ export GOPATH=/Users/armilam/.asdf/installs/golang/1.18/packages
 
 # python
 alias py=python
-alias pm='poetry run python server/manage.py'
+alias pm='poetry run python -Wd server/manage.py'
 alias po='poetry run'
-alias pt='pm test --no-input --parallel --keepdb'
+alias pt='ENVIRONMENT=testing pm test --no-input --parallel --keepdb'
 export PATH="$PATH:`python3 -m site --user-base`/bin"
 
 # node
@@ -167,3 +178,7 @@ complete -o nospace -C /opt/homebrew/bin/terraform terraform
 
 # bun completions
 [ -s "/Users/armilam/.bun/_bun" ] && source "/Users/armilam/.bun/_bun"
+
+# 1Password CLI
+eval "$(op completion zsh)"; compdef _op op
+
