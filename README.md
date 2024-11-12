@@ -48,7 +48,15 @@ You'll also want to install these things:
 - [Sublime Text](https://www.sublimetext.com/)
     - Better for mass-editing large files
 - [Kap](https://getkap.co/)
-- [Docker](https://docs.docker.com/desktop/mac/install/)
+- Docker
+    - Docker Desktop license sucks. Don't even install it.
+    - I now install [docker CLI via homebrew](https://formulae.brew.sh/formula/docker) with `brew install docker`
+    - I also need [colima](https://github.com/abiosoft/colima) to act as the docker engine
+        ```
+        $ brew install colima
+        $ colima start
+        $ docker ps
+        ```
 - [Dropbox](https://www.dropbox.com/install)
 - [Zoom](https://zoom.us/download)
 - [Daisy Disk](https://apps.apple.com/us/app/daisydisk/id411643860)
