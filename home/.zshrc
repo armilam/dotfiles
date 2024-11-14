@@ -113,7 +113,7 @@ alias dw='docker compose exec web'
 # Denim
 alias denim-queues='awslocal sqs create-queue --queue-name denim-local-email-queue && awslocal sqs create-queue --queue-name denim-local-email-event-queue && awslocal sqs create-queue --queue-name denim-local-sms-queue && awslocal sqs create-queue --queue-name denim-local-file-parse-queue && awslocal sqs create-queue --queue-name denim-local-announcement-queue && awslocal sqs create-queue --queue-name denim-local-assignment-queue && awslocal sqs create-queue --queue-name denim-local-create-tango-queue && awslocal sqs create-queue --queue-name denim-local-announcement-notification-queue'
 alias denim-buckets='awslocal s3api create-bucket --bucket denim-local-app-bucket && awslocal s3api create-bucket --bucket denim-local-sftp && awslocal s3api create-bucket --bucket denim-local-email-bucket'
-alias denim-infra='startpg & startredis & localstack start > ~/.tmp/.lcltemp & sleep 10 && denim-queues && denim-buckets && tail -f ~/.tmp/.lcltemp'
+alias denim-infra='colima start && startpg & startredis & localstack start > ~/.tmp/.lcltemp & sleep 10 && denim-queues && denim-buckets && tail -f ~/.tmp/.lcltemp'
 alias denim-infra-stop='stoppg & stopredis & localstack stop && rm ~/.tmp/.lcltemp'
 alias denim-workers='pm worker --queues denim-local-email-queue,denim-local-email-event-queue,denim-local-sms-queue,denim-local-file-parse-queue,denim-local-announcement-queue,denim-local-assignment-queue,denim-local-create-tango-queue,denim-local-announcement-notification-queue'
 alias denim-server='pm runserver'

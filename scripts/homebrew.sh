@@ -79,6 +79,16 @@ fi
 echo "Setting up fzf..."
 $(brew --prefix)/opt/fzf/install
 
+# colima (docker engine)
+echo "Checking for ${format_bold}colima${format_normal} via Homebrew..."
+if brew ls --versions colima > /dev/null; then
+  echo "colima found. Updating it..."
+  brew upgrade colima
+else
+  echo "colima not found. Installing it..."
+  brew install colima
+fi
+
 echo "Cleaning up Homebrew..."
 brew cleanup
 
