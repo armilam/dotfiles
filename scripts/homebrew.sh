@@ -79,6 +79,16 @@ fi
 echo "Setting up fzf..."
 $(brew --prefix)/opt/fzf/install
 
+# docker
+echo "Checking for ${format_bold}docker${format_normal} via Homebrew..."
+if brew ls --versions docker > /dev/null; then
+  echo "docker found. Updating it..."
+  brew upgrade docker
+else
+  echo "docker not found. Installing it..."
+  brew install docker
+fi
+
 # colima (docker engine)
 echo "Checking for ${format_bold}colima${format_normal} via Homebrew..."
 if brew ls --versions colima > /dev/null; then
@@ -87,6 +97,16 @@ if brew ls --versions colima > /dev/null; then
 else
   echo "colima not found. Installing it..."
   brew install colima
+fi
+
+# localstack-cli
+echo "Checking for ${format_bold}localstack-cli${format_normal} via Homebrew..."
+if brew ls --versions localstack-cli > /dev/null; then
+  echo "localstack-cli found. Updating it..."
+  brew upgrade localstack-cli
+else
+  echo "localstack-cli not found. Installing it..."
+  brew install localstack/tap/localstack-cli
 fi
 
 echo "Cleaning up Homebrew..."
