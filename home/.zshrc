@@ -21,15 +21,6 @@ ZSH_THEME="armilam"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git asdf)
 
-# This enables completion for heroku and must appear before calling oh-my-zsh.sh
-if type brew &>/dev/null
-then
-  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-
-  autoload -Uz compinit
-  compinit
-fi
-
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -62,6 +53,7 @@ source $ZSH/oh-my-zsh.sh
 alias vz='vi ~/.zshrc'
 
 # git
+alias g='git'
 alias st='git status'
 alias co='git checkout'
 alias fco='git fco'
@@ -83,17 +75,6 @@ function sshall() {
 }
 alias ssha='sshall'
 ssh-add --apple-load-keychain
-
-# Heroku
-alias dburl='heroku config:get DATABASE_URL -a '
-alias h='heroku'
-function hay() { heroku $@ -a woven-apply-yourself; }
-function hays() { heroku $@ -a woven-apply-yourself-staging; }
-function hjs() { heroku $@ -a woven-job-scraper; }
-function hwh() { heroku $@ -a woven-webhooks; }
-hc() {
-  heroku config -a ${2:-woven-apply-yourself} | grep ${1:-SIDEKIQ_PASSWORD} | awk -F ' ' '{ print $2 }' | pbcopy
-}
 
 # Rails development
 alias be='bundle exec'
