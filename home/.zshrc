@@ -1,4 +1,4 @@
-export ZSH=/Users/armilam/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -23,7 +23,17 @@ plugins=(git asdf)
 
 source $ZSH/oh-my-zsh.sh
 
+autoload -Uz compinit
+compinit
+
 # User configuration
+
+# Device-specific configuration
+if [ -f "$HOME/.zshrc.local" ]; then
+  source $HOME/.zshrc.local
+else
+  echo "No .zshrc.local found."
+fi
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -64,24 +74,9 @@ alias rb='git rebase'
 
 function gitscript() {
   echo "Doing $1"
-  ./.git/scripts/$1
+  ./.git/scripts/$1 $2 $3
 }
 alias gs='gitscript'
-
-# ssh
-function sshall() {
-  eval $(ssh-agent -s)
-  ssh-add --apple-load-keychain
-}
-alias ssha='sshall'
-ssh-add --apple-load-keychain
-
-# Rails development
-alias be='bundle exec'
-alias devlog='tail -f log/development.log ~/Library/Logs/puma-dev.log'
-alias pumar='touch tmp/restart.txt'
-alias pumas='puma-dev -stop'
-alias pumak='killall -9 puma-dev'
 
 # Docker
 alias dc='docker compose'
@@ -110,17 +105,14 @@ alias stopredis='redis-cli shutdown'
 alias startmongo='brew services start mongodb-community'
 alias stopmongo='brew services stop mongodb-community'
 
-# Terraform
-alias tf='terraform'
-
 alias ff='fzf'
 
-export PATH="$PATH:$HOME/dotfiles/bin:/usr/local/opt/libpq/bin"
+export PATH="$PATH:/usr/local/opt/libpq/bin"
 
-# The next line updates PATH for the Google Cloud SDK.
+# Google Cloud SDK
+# Update PATH for the Google Cloud SDK.
 if [ -f '/Users/armilam/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/armilam/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
+# Enable shell command completion for gcloud.
 if [ -f '/Users/armilam/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/armilam/google-cloud-sdk/completion.zsh.inc'; fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -136,24 +128,24 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # asdf
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
+# . $HOME/.asdf/asdf.sh
+# . $HOME/.asdf/completions/asdf.bash
+ASDF_DATA_DIR="$HOME/.asdf"
+export PATH="$ASDF_DATA_DIR/shims:$PATH"
 alias arst='asdf'
-
-# golang
-export GOROOT=/Users/armilam/.asdf/installs/golang/1.18/go
-export GOPATH=/Users/armilam/.asdf/installs/golang/1.18/packages
 
 # python
 alias py=python
-alias pm='poetry run python -Wd server/manage.py'
+alias pm='python -Wd src/manage.py'
 alias po='poetry run'
-alias pt='ENVIRONMENT=testing pm test --no-input --parallel --keepdb'
-export PATH="$PATH:`python3 -m site --user-base`/bin"
+alias activate='python -m venv venv && source venv/bin/activate'
+#export PATH="$PATH:`python3 -m site --user-base`/bin"
 
 # node
 alias pn=pnpm
 
+# Terraform
+alias tf='terraform'
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
 
@@ -162,4 +154,28 @@ complete -o nospace -C /opt/homebrew/bin/terraform terraform
 
 # 1Password CLI
 eval "$(op completion zsh)"; compdef _op op
+
+# Nix
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
+# End Nix
+
+# pnpm
+export PNPM_HOME="$HOME/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+# Paradox
+alias pdb='mysql -h127.0.0.1 -P3306 -uroot -proot@1345 rc -A'
+alias pdb-log='tail -f mysql/all.log'
+alias pdb-prod='sdm connect vpc-olivia-prod-west-db-usw2-ro && sleep 5 && mysql -h127.0.0.1 -P10775 -uroot -A applydb; sdm disconnect vpc-olivia-prod-west-db-usw2-ro'
+alias pdb-stg='sdm connect vpc-olivia-stg-west-db-usw2-ro && sleep 5 && mysql -h127.0.0.1 -P10925 -uroot -A applydb_prod; sdm disconnect vpc-olivia-stg-west-db-usw2-ro'
+alias pdb-dev='sdm connect vpc-olivia-dev-db-use1-ro && sleep 5 && mysql -h127.0.0.1 -P10840 -uroot -A applydb_prod; sdm disconnect vpc-olivia-dev-db-use1-ro'
+alias pdb-test='sdm connect paradox-test-ro-db-use1-ro && sleep 5 && mysql -h127.0.0.1 -P10843 -uroot -A applydb_prod; sdm disconnect paradox-test-ro-db-use1-ro'
+alias pdb-test-highio='sdm connect paradox-test-highio-db-use1-ro && sleep 5 && mysql -h127.0.0.1 -P10032 -uroot -A highio; sdm disconnect paradox-test-highio-db-use1-ro'
+alias pdb-mch-highio='sdm connect mchire-prod-highio-dr-db-usw2-ro && sleep 5 && mysql -h127.0.0.1 -P10126 -uroot -A highio; sdm disconnect mchire-prod-highio-dr-db-usw2-ro'
 

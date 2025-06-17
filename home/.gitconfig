@@ -18,6 +18,7 @@
 	dt = "!git difftool"
 	dtc = "!git difftool --cached"
 	fo = "!git fetch origin"
+	foc = "!git fetch origin && git cleanup"
 	st = "!git status"
 	po = "!git push -u origin $(git rev-parse --abbrev-ref HEAD)"
 	m = merge
@@ -32,24 +33,17 @@
         fco="!f() { git branch -a -vv --color=always --format='%(refname)' | sed "s_refs/heads/__" | sed "s_refs/remotes/__" | fzf --query="$@" --height=40% --ansi --tac --color=16 --border | awk '{print $1}' | xargs git checkout; }; f"
 [init]
 	templatedir = ~/.git_template
-[mergetool "Kaleidoscope"]
-	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-	trustexitcode = true
-[merge]
-	tool = Kaleidoscope
-[difftool "Kaleidoscope"]
-	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
-[difftool]
-	prompt = false
-[mergetool]
-	prompt = false
-[diff]
-	tool = Kaleidoscope
 
 
-[url "https://4cf9d57aafda46fdfb06d7660255eb14b3007d68@github.com/highalpha"]
-	insteadOf = https://github.com/highalpha
 [core]
-	excludesfile = /Users/armilam/.gitignore
+	excludesfile = ~/.gitignore
+	# excludeFile = ~/.gitignore
 [pull]
 	ff = only
+
+[includeIf "gitdir:~/Source/ParadoxAi/"]
+	path = ~/Source/ParadoxAi/.gitconfig
+
+[includeIf "gitdir:~/Source/denim-us/"]
+	path = ~/Source/denim-us/.gitconfig
+
