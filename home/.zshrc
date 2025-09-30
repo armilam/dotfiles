@@ -26,6 +26,9 @@ source $ZSH/oh-my-zsh.sh
 autoload -Uz compinit
 compinit
 
+# homebrew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # User configuration
 
 # Device-specific configuration
@@ -63,14 +66,15 @@ fi
 alias vz='vi ~/.zshrc'
 
 # git
-alias g='git'
-alias st='git status'
-alias co='git checkout'
-alias fco='git fco'
-alias pull='git pull'
-alias push='git push'
-alias start-over="git checkout master && git fetch origin && git pull && bundle && npm run webpack && rake db:migrate"
-alias rb='git rebase'
+# these all work, but i want to use git aliases instead of adding to the global alias pool
+#alias g='git'
+#alias st='git status'
+#alias co='git checkout'
+#alias fco='git fco'
+#alias pull='git pull'
+#alias push='git push'
+#alias start-over="git checkout master && git fetch origin && git pull && bundle && npm run webpack && rake db:migrate"
+#alias rb='git rebase'
 
 function gitscript() {
   echo "Doing $1"
@@ -124,9 +128,6 @@ export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
-# homebrew
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
 # asdf
 # . $HOME/.asdf/asdf.sh
 # . $HOME/.asdf/completions/asdf.bash
@@ -136,7 +137,7 @@ alias arst='asdf'
 
 # python
 alias py=python
-alias pm='python -Wd src/manage.py'
+alias pm='python src/manage.py'
 alias po='poetry run'
 alias activate='python -m venv venv && source venv/bin/activate'
 #export PATH="$PATH:`python3 -m site --user-base`/bin"
@@ -168,14 +169,4 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-
-# Paradox
-alias pdb='mysql -h127.0.0.1 -P3306 -uroot -proot@1345 rc -A'
-alias pdb-log='tail -f mysql/all.log'
-alias pdb-prod='sdm connect vpc-olivia-prod-west-db-usw2-ro && sleep 5 && mysql -h127.0.0.1 -P10775 -uroot -A applydb; sdm disconnect vpc-olivia-prod-west-db-usw2-ro'
-alias pdb-stg='sdm connect vpc-olivia-stg-west-db-usw2-ro && sleep 5 && mysql -h127.0.0.1 -P10925 -uroot -A applydb_prod; sdm disconnect vpc-olivia-stg-west-db-usw2-ro'
-alias pdb-dev='sdm connect vpc-olivia-dev-db-use1-ro && sleep 5 && mysql -h127.0.0.1 -P10840 -uroot -A applydb_prod; sdm disconnect vpc-olivia-dev-db-use1-ro'
-alias pdb-test='sdm connect paradox-test-ro-db-use1-ro && sleep 5 && mysql -h127.0.0.1 -P10843 -uroot -A applydb_prod; sdm disconnect paradox-test-ro-db-use1-ro'
-alias pdb-test-highio='sdm connect paradox-test-highio-db-use1-ro && sleep 5 && mysql -h127.0.0.1 -P10032 -uroot -A highio; sdm disconnect paradox-test-highio-db-use1-ro'
-alias pdb-mch-highio='sdm connect mchire-prod-highio-dr-db-usw2-ro && sleep 5 && mysql -h127.0.0.1 -P10126 -uroot -A highio; sdm disconnect mchire-prod-highio-dr-db-usw2-ro'
 
