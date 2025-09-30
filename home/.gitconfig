@@ -4,33 +4,75 @@
 [push]
 	default = simple
 [alias]
+	# set current branch upstream to origin branch of the same name
 	track = "!git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`"
+
+	# prune local refs to deleted remote branches
 	cleanup = "!git remote prune origin && git branch -vv | grep ': gone]' | cut -d ' ' -f 3 | xargs -n 1 git branch -D"
+
 	c = "!git commit"
+	co = checkout
 	cob = "!git checkout -b"
 	cm = "!git commit -m"
 	cam = "!git commit -am"
 	can = "!git commit --amend --no-edit"
+
+	# copy the current branch name
 	cb = "!git branch | grep '*' | awk '{ print $2 }' | pbcopy"
+	copy-branch-name = cb
+
 	d = "!git diff --color-moved"
         ds = "!git diff --color-moved --staged"
-	dc = "!git diff --cached"
 	dt = "!git difftool"
-	dtc = "!git difftool --cached"
+	dts = "!git difftool --staged"
 	fo = "!git fetch origin"
+
+	# update local branch to match origin and rebase current branch on top
+	fob = "!f() { git fetch origin $1:$1 && git rebase $1; }; f"
+	fetch-and-rebase = fob
+
+	# update local branch to match origin and rebase current branch on top, stashing and restoring current changes
+	fobs = "!f() { git stash && git fetch origin $1:$1 && git rebase $1 && git stash pop; }; f"
+	stage-fetch-and-rebase = fobs
+
+	# fetch refs from origin and prune local refs to deleted remote branches
 	foc = "!git fetch origin && git cleanup"
-	st = "!git status"
+	fetch-and-cleanup = foc
+
+	# log last 20 commits in short format
+	ls = "!git log --oneline --decorate -20"
+	short-log = ls
+
+	# graph recent commits in short format
+	lsg = "!git log --oneline --decorate --graph -20"
+	short-graph-log = lsg
+	lg = "!git log --oneline --decorate --graph"
+
+	p = "!git pull"
+	ps = "!f() { git stash && git pull && git stash pop; }; f"
+	stash-and-pull = ps
+
 	po = "!git push -u origin $(git rev-parse --abbrev-ref HEAD)"
+	push-origin = po
+	pof = "!git po -f"
+	push-origin-force = pof
+
 	m = merge
 	mo = "!git merge origin/$1 #"
+
 	r = "!git rebase"
-	rom = "!git fetch origin && git rebase origin/master"
-	sl = "!git log --oneline --decorate -20"
-	slg = "!git log --oneline --decorate --graph -20"
-	lg = "!git log --oneline --decorate --graph"
+	ra = "!git rebase --abort"
+	rc = "!git rebase --continue"
+	
+	st = "!git status"
+
 	ff = "!git merge --ff-only"
-        #fco="!f() { git branch -l -vv --color=always --format='%(refname)' | sed "s_refs/heads/__" | fzf --query="$@" --height=40% --ansi --tac --color=16 --border | awk '{print $1}' | xargs git co; }; f"
+	fast-forward-merge = ff
+
+	# fco: find and check out branch
         fco="!f() { git branch -a -vv --color=always --format='%(refname)' | sed "s_refs/heads/__" | sed "s_refs/remotes/__" | fzf --query="$@" --height=40% --ansi --tac --color=16 --border | awk '{print $1}' | xargs git checkout; }; f"
+	find-branch-and-checkout = fco
+
 [init]
 	templatedir = ~/.git_template
 
@@ -47,3 +89,7 @@
 [includeIf "gitdir:~/Source/denim-us/"]
 	path = ~/Source/denim-us/.gitconfig
 
+[diff]
+	tool = vscode
+[difftool "vscode"]
+	cmd = code --wait --diff $LOCAL $REMOTE
