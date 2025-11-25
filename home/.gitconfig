@@ -83,13 +83,11 @@
 [pull]
 	ff = only
 
-[includeIf "gitdir:~/Source/ParadoxAi/"]
-	path = ~/Source/ParadoxAi/.gitconfig
-
-[includeIf "gitdir:~/Source/denim-us/"]
-	path = ~/Source/denim-us/.gitconfig
-
 [diff]
 	tool = vscode
 [difftool "vscode"]
 	cmd = code --wait --diff $LOCAL $REMOTE
+
+[includeIf "gitdir:~/Source/parker/"]
+        path = ~/Source/parker/.gitconfig
+
