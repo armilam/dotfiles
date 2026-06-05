@@ -18,14 +18,24 @@
 	can = "!git commit --amend --no-edit"
 
 	# copy the current branch name
-	cb = "!git branch | grep '*' | awk '{ print $2 }' | pbcopy"
+	# cb = "!git branch | grep '*' | awk '{ printf $2 }' | pbcopy"
+	cb = "!git branch --show-current | awk '{ printf $1 }' | pbcopy"
 	copy-branch-name = cb
 
 	d = "!git diff --color-moved"
         ds = "!git diff --color-moved --staged"
 	dt = "!git difftool"
 	dts = "!git difftool --staged"
+	dn = "!git diff --name-status"
+	dsn = "!git diff --name-status --staged"
 	fo = "!git fetch origin"
+
+        # git diff across all submodules
+        dm = !zsh -ic 'git_diff_submodules'
+
+	# git action across all submodules
+	sfe = "!git submodule foreach"
+	sfer = "!git submodule foreach --recursive"
 
 	# update local branch to match origin and rebase current branch on top
 	fob = "!f() { git fetch origin $1:$1 && git rebase $1; }; f"
@@ -39,14 +49,17 @@
 	foc = "!git fetch origin && git cleanup"
 	fetch-and-cleanup = foc
 
-	# log last 20 commits in short format
-	ls = "!git log --oneline --decorate -20"
+	# log commits in short format
+	lst = "log --pretty=format:'%Cred%h%Creset -%C(bold cyan)%d%Creset %C(white)%s%Creset %C(magenta)(%cr)%Creset %C(bold blue)%an%Creset' --abbrev-commit --date=relative"
+	short-log-with-tags = lst
+	ls = "lst --decorate-refs-exclude=refs/tags"
 	short-log = ls
 
-	# graph recent commits in short format
-	lsg = "!git log --oneline --decorate --graph -20"
+	# graph commits in short format
+	lstg = "log --graph --pretty=format:'%Cred%h%Creset -%C(bold cyan)%d%Creset %C(white)%s%Creset %C(magenta)(%cr)%Creset %C(bold blue)%an%Creset' --abbrev-commit --date=relative"
+	lsg = "lstg --decorate-refs-exclude=refs/tags"
+	short-graph-log-with-tags = lstg
 	short-graph-log = lsg
-	lg = "!git log --oneline --decorate --graph"
 
 	p = "!git pull"
 	ps = "!f() { git stash && git pull && git stash pop; }; f"
@@ -54,8 +67,10 @@
 
 	po = "!git push -u origin $(git rev-parse --abbrev-ref HEAD)"
 	push-origin = po
-	pof = "!git po -f"
+	pof = "po -f"
 	push-origin-force = pof
+	pod = 'push origin --delete'
+	push-origin-and-delete-refs = pod
 
 	m = merge
 	mo = "!git merge origin/$1 #"
@@ -75,19 +90,25 @@
 
 [init]
 	templatedir = ~/.git_template
+	defaultBranch = main
 
 
 [core]
 	excludesfile = ~/.gitignore
 	# excludeFile = ~/.gitignore
+	pager = "less -S"
 [pull]
 	ff = only
 
 [diff]
-	tool = vscode
+	tool = cursor
 [difftool "vscode"]
 	cmd = code --wait --diff $LOCAL $REMOTE
+[difftool "cursor"]
+	cmd = cursor --wait --diff $LOCAL $REMOTE
 
 [includeIf "gitdir:~/Source/parker/"]
         path = ~/Source/parker/.gitconfig
 
+[submodule]
+	ignore = all

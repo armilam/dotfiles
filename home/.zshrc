@@ -31,12 +31,6 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # User configuration
 
-# Device-specific configuration
-if [ -f "$HOME/.zshrc.local" ]; then
-  source $HOME/.zshrc.local
-else
-  echo "No .zshrc.local found."
-fi
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -81,6 +75,16 @@ function gitscript() {
   ./.git/scripts/$1 $2 $3
 }
 alias gs='gitscript'
+
+git_diff_submodules() {
+  git submodule foreach --recursive '
+    if [ -n "$(git status --porcelain)" ]; then
+      printf "\n=== %s ===\n" "$path"
+      git difftool -y
+    fi
+  '
+}
+
 
 # Docker
 alias dc='docker compose'
@@ -170,14 +174,10 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-# Parker
-export PATH=$PATH:$(arst where golang)/bin
-source <(kubectl completion zsh)
-alias dn=dotnet
-alias kc=kubectl
-alias wat='watch '
-alias rco='repo checkout'
-alias rpull='repo pull'
-alias rpush='repo push'
-alias rst='repo status'
+# Device-specific configuration
+if [ -f "$HOME/.zshrc.local" ]; then
+  source $HOME/.zshrc.local
+else
+  echo "No .zshrc.local found."
+fi
 
