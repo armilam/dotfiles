@@ -23,8 +23,10 @@ plugins=(git asdf)
 
 source $ZSH/oh-my-zsh.sh
 
-autoload -Uz compinit
-compinit
+# zsh functions - zfunc
+fpath=(~/.zfunc $fpath)
+
+autoload -Uz compinit && compinit
 
 # homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -128,12 +130,15 @@ export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
-# asdf
+# asdf - trying mise instead
 # . $HOME/.asdf/asdf.sh
 # . $HOME/.asdf/completions/asdf.bash
-ASDF_DATA_DIR="$HOME/.asdf"
-export PATH="$ASDF_DATA_DIR/shims:$PATH"
-alias arst='asdf'
+#ASDF_DATA_DIR="$HOME/.asdf"
+#export PATH="$ASDF_DATA_DIR/shims:$PATH"
+#alias arst='asdf'
+
+# mise
+eval "$(~/.local/bin/mise activate zsh)"
 
 # python
 alias py=python
@@ -141,6 +146,9 @@ alias pm='python src/manage.py'
 alias po='poetry run'
 alias activate='python -m venv venv && source venv/bin/activate'
 #export PATH="$PATH:`python3 -m site --user-base`/bin"
+
+# ruby
+alias be='bundle exec'
 
 # node
 alias pn=pnpm
@@ -169,4 +177,9 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/armilam/.lmstudio/bin"
+# End of LM Studio CLI section
 
